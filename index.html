@@ -359,7 +359,7 @@
         <li><a href="#testimonials">Clients</a></li>
         <li><a href="#faq">FAQ</a></li>
       </ul>
-      <a href="#cta-final" class="btn btn-gold nav-cta" data-variant="cta">Book a Call</a>
+      <a href="https://calendly.com/alenashikova/30min" class="btn btn-gold nav-cta" data-variant="cta" target="_blank" rel="noopener noreferrer">Book a Call</a>
       <button class="nav-hamburger" id="menuToggle" aria-label="Open navigation menu" aria-expanded="false">
         <i data-lucide="menu"></i>
       </button>
@@ -375,7 +375,7 @@
     <a href="#features">Services</a>
     <a href="#testimonials">Clients</a>
     <a href="#faq">FAQ</a>
-    <a href="#cta-final" class="btn btn-gold" style="margin-top:8px;" data-variant="cta">Book a Call</a>
+    <a href="https://calendly.com/alenashikova/30min" class="btn btn-gold" style="margin-top:8px;" data-variant="cta" target="_blank" rel="noopener noreferrer">Book a Call</a>
   </div>
 
   <main>
@@ -388,12 +388,7 @@
         <h1 data-variant="title">Where Brands<br>Become <em>Benchmarks.</em></h1>
         <p class="hero-sub" data-variant="subtitle">We build marketing ecosystems that convert attention into lasting revenue — for companies who refuse to be ordinary.</p>
         <div class="hero-form-wrap">
-          <form class="email-row" id="hero-form" novalidate>
-            <label for="hero-email">Email address</label>
-            <input type="email" id="hero-email" name="email" placeholder="your@email.com" autocomplete="email" required />
-            <button type="submit" class="btn btn-gold" data-variant="cta">Book a Call</button>
-          </form>
-          <div class="form-msg" id="hero-msg" role="status" aria-live="polite"></div>
+          <a href="https://calendly.com/alenashikova/30min" class="btn btn-gold" data-variant="cta" target="_blank" rel="noopener noreferrer">Book a Call</a>
         </div>
       </div>
     </section>
@@ -634,7 +629,7 @@
             <p class="section-label">FAQ</p>
             <h2>Questions worth asking.</h2>
             <p>If something isn't covered here, a 20-minute call usually answers it. Book one — no pitch, no pressure.</p>
-            <a href="#cta-final" class="btn btn-ghost">Book a Call</a>
+            <a href="https://calendly.com/alenashikova/30min" class="btn btn-ghost" target="_blank" rel="noopener noreferrer">Book a Call</a>
           </aside>
           <div class="faq-list" role="list">
             <div class="faq-item rv" role="listitem">
@@ -705,12 +700,7 @@
         <h2 class="rv d1">Ready to become<br>the <em>benchmark?</em></h2>
         <p class="rv d2">Book a strategy call. We'll audit your current marketing and map a clear path to the growth you're targeting — no pitch, no pressure.</p>
         <div class="rv d3">
-          <form class="email-row" id="cta-form" novalidate style="justify-content:center;">
-            <label for="cta-email">Email address</label>
-            <input type="email" id="cta-email" name="email" placeholder="your@email.com" autocomplete="email" required />
-            <button type="submit" class="btn btn-gold" data-variant="cta">Book a Call</button>
-          </form>
-          <div class="form-msg" id="cta-msg" role="status" aria-live="polite"></div>
+          <a href="https://calendly.com/alenashikova/30min" class="btn btn-gold" data-variant="cta" target="_blank" rel="noopener noreferrer">Book a Call</a>
         </div>
       </div>
     </section>
@@ -839,38 +829,6 @@
   }, { threshold: 0.3 });
   spineObs.observe(hiw);
 
-  /* ─── FORM SUBMIT ─── */
-  async function handleForm(form, msgEl) {
-    const inp = form.querySelector('input[type="email"]');
-    const btn = form.querySelector('button[type="submit"]');
-    const email = inp.value.trim();
-    if (!email) { inp.focus(); return; }
-    btn.disabled = true;
-    const orig = btn.textContent;
-    btn.textContent = 'Sending…';
-    msgEl.textContent = '';
-    msgEl.className = 'form-msg';
-    try {
-      const res = await fetch('https://landingapi.kento.studio/api/signups', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, landingPageId: '6a36b59ff5b2e7622c723e2e' })
-      });
-      if (res.status === 200 || res.status === 201) {
-        msgEl.textContent = 'Your seat is reserved — we'll be in touch within 24 hours.';
-        inp.value = '';
-      } else if (res.status === 409) {
-        msgEl.textContent = 'You\'re already on our list.';
-      } else { throw new Error(); }
-    } catch {
-      msgEl.textContent = 'Something went wrong — try again.';
-      msgEl.classList.add('err');
-    } finally {
-      btn.disabled = false; btn.textContent = orig;
-    }
-  }
-  document.getElementById('hero-form').addEventListener('submit', e => { e.preventDefault(); handleForm(e.currentTarget, document.getElementById('hero-msg')); });
-  document.getElementById('cta-form').addEventListener('submit',  e => { e.preventDefault(); handleForm(e.currentTarget, document.getElementById('cta-msg')); });
 
   /* ─── GROWTH CALCULATOR ─── */
   (function() {
