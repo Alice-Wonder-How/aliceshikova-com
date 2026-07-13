@@ -113,10 +113,17 @@
     .f-logo img { display:block; height:auto; width:188px; max-width:42vw; object-fit:contain; opacity:.9; transition:opacity .2s; }
     .f-logo:hover img { opacity:1; }
     .nav-links { display:flex; align-items:center; gap:36px; }
-    .nav-links a { font-size:.78rem; font-weight:500; letter-spacing:.07em; text-transform:uppercase; color:var(--text-2); transition:color .2s; position:relative; }
-    .nav-links a::after { content:''; position:absolute; bottom:-2px; left:0; width:0; height:1px; background:var(--gold); transition:width .3s ease; }
-    .nav-links a:hover { color:var(--text); }
-    .nav-links a:hover::after { width:100%; }
+    .nav-links a, .nav-drop-btn { font-size:.78rem; font-weight:500; letter-spacing:.07em; text-transform:uppercase; color:var(--text-2); transition:color .2s; position:relative; font-family:var(--font-b); }
+    .nav-drop-btn { background:none; border:none; cursor:pointer; display:inline-flex; align-items:center; gap:6px; padding:0; }
+    .nav-links a::after, .nav-drop-btn::after { content:''; position:absolute; bottom:-2px; left:0; width:0; height:1px; background:var(--gold); transition:width .3s ease; }
+    .nav-links a:hover, .nav-dropdown:hover .nav-drop-btn, .nav-dropdown:focus-within .nav-drop-btn { color:var(--text); }
+    .nav-links a:hover::after, .nav-dropdown:hover .nav-drop-btn::after, .nav-dropdown:focus-within .nav-drop-btn::after { width:100%; }
+    .nav-dropdown { position:relative; }
+    .nav-dropdown-menu { position:absolute; top:calc(100% + 18px); right:0; min-width:164px; padding:10px; border:1px solid var(--bdr-m); background:rgba(7,7,6,.96); backdrop-filter:blur(18px); box-shadow:0 24px 60px rgba(0,0,0,.35); opacity:0; visibility:hidden; transform:translateY(8px); transition:opacity .2s ease, transform .2s ease, visibility .2s ease; }
+    .nav-dropdown:hover .nav-dropdown-menu, .nav-dropdown:focus-within .nav-dropdown-menu { opacity:1; visibility:visible; transform:translateY(0); }
+    .nav-dropdown-menu a { display:block; padding:10px 12px; color:var(--text-2); white-space:nowrap; }
+    .nav-dropdown-menu a:hover { color:var(--gold-l); background:var(--glow); }
+    .nav-dropdown-menu a::after { display:none; }
     .nav-cta { padding:10px 22px; font-size:.78rem; }
     .nav-hamburger { display:none; background:none; border:none; color:var(--text); cursor:pointer; padding:4px; }
 
@@ -246,22 +253,18 @@
     .nav-dot.active { width:22px; background:var(--gold); }
     @media (max-width:768px) { .testi-card { grid-template-columns:1fr; gap:32px; } }
 
-    /* ─────────────── FAQ ─────────────── */
-    #faq { position:relative; padding:var(--sp) 0; background:var(--bg-0); }
-    /* Sidebar + accordion — asymmetric 2-col */
-    .faq-layout { display:grid; grid-template-columns:1fr 2fr; gap:clamp(40px,6vw,96px); align-items:start; }
-    .faq-aside { position:sticky; top:110px; }
-    .faq-aside h2 { font-size:clamp(2.4rem,4vw,3.5rem); font-weight:400; line-height:1.06; margin-bottom:18px; }
-    .faq-aside p { color:var(--text-2); font-size:.9375rem; line-height:1.65; margin-bottom:28px; }
-    .faq-list { border-top:1px solid var(--bdr); }
-    .faq-item { border-bottom:1px solid var(--bdr); }
-    .faq-q { width:100%; background:none; border:none; text-align:left; padding:24px 0; display:flex; justify-content:space-between; align-items:center; gap:16px; cursor:pointer; color:var(--text); font-family:var(--font-h); font-size:1.2rem; font-weight:500; transition:color .2s; }
-    .faq-q:hover { color:var(--gold-l); }
-    .faq-icon { flex-shrink:0; width:28px; height:28px; border:1px solid var(--bdr-m); border-radius:50%; display:flex; align-items:center; justify-content:center; color:var(--gold); transition:transform .35s, border-color .2s; }
-    .faq-item.open .faq-icon { transform:rotate(45deg); border-color:var(--gold); }
-    .faq-a { max-height:0; overflow:hidden; transition:max-height .45s cubic-bezier(.16,1,.3,1); }
-    .faq-a-inner { padding-bottom:24px; color:var(--text-2); font-size:.9375rem; line-height:1.72; }
-    @media (max-width:900px) { .faq-layout { grid-template-columns:1fr; } .faq-aside { position:static; } }
+    /* ─────────────── CONNECT ─────────────── */
+    #connect { position:relative; padding:var(--sp) 0; background:var(--bg-0); }
+    .connect-layout { display:grid; grid-template-columns:1fr 1.35fr; gap:clamp(40px,6vw,96px); align-items:center; }
+    .connect-copy h2 { font-size:clamp(2.4rem,4vw,3.5rem); font-weight:400; line-height:1.06; margin-bottom:18px; }
+    .connect-copy h2 em { font-style:italic; color:var(--gold-l); }
+    .connect-copy p { color:var(--text-2); font-size:.9375rem; line-height:1.65; max-width:420px; }
+    .connect-list { border-top:1px solid var(--bdr); }
+    .connect-link { display:flex; justify-content:space-between; align-items:center; gap:20px; padding:28px 0; border-bottom:1px solid var(--bdr); color:var(--text); transition:padding .25s ease, color .2s ease, background .25s ease; }
+    .connect-link:hover { padding-left:16px; padding-right:16px; margin-left:-16px; margin-right:-16px; color:var(--gold-l); background:var(--glow); }
+    .connect-link strong { font-family:var(--font-h); font-size:clamp(1.7rem,3vw,2.45rem); font-weight:400; }
+    .connect-link span { font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--text-3); }
+    @media (max-width:900px) { .connect-layout { grid-template-columns:1fr; } }
 
     /* ─────────────── FINAL CTA ─────────────── */
     #cta-final { position:relative; padding:var(--sp) 0; background:var(--bg-0); text-align:center; overflow:hidden; }
@@ -327,62 +330,6 @@
   "dateModified": "2026-06-20"
 }
 </script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "What types of businesses does Shikova work with?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Shikova works with growth-stage companies and established brands across B2B technology, professional services, consumer lifestyle, and e-commerce. Their ideal client has ambitious growth targets and is prepared to invest seriously in marketing."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "How do you measure success?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Meaningful performance signals typically emerge within 30–60 days of a campaign going live. Brand and SEO work compounds over 3–6 months, with clear milestones set from day one so clients always know what is being measured and when to expect it."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Does Shikova work with international clients?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes. Shikova works with clients across North America, Europe, and the Middle East. Their distributed team is experienced in multi-market campaign execution, localisation, and navigating different regulatory environments for paid media."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What does a typical engagement include?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Every engagement starts with a discovery and strategy phase, after which scope is built around the client's specific goals — which may include paid media management, creative production, SEO content, or a combination. Engagements are structured around outcomes, not hourly retainers."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What makes this different from a typical agency?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Shikova is a small senior team with no junior account managers and no outsourced work. Every strategy is bespoke and all creative is executed in-house, with every decision tied to commercial revenue goals rather than activity metrics like reports or meetings."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Do you have experience with Web3 and fintech companies?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Clients should expect weekly strategy sessions, clear deliverable timelines, and a dedicated point of contact. Shikova requires the client's domain knowledge in exchange for providing full execution capability."
-      }
-    }
-  ]
-}
-</script>
 </head>
 <body>
 
@@ -395,7 +342,13 @@
         <li><a href="#how-it-works">Process</a></li>
         <li><a href="#features">Services</a></li>
         <li><a href="#speaking">Speaking</a></li>
-        <li><a href="#faq">FAQ</a></li>
+        <li class="nav-dropdown">
+          <button class="nav-drop-btn" type="button" aria-haspopup="true">Connect <i data-lucide="chevron-down" style="width:12px;height:12px;"></i></button>
+          <div class="nav-dropdown-menu" role="menu">
+            <a href="https://x.com/AliceSh15" target="_blank" rel="noopener noreferrer" role="menuitem">X</a>
+            <a href="https://www.linkedin.com/in/alice-shikova-36a708194/" target="_blank" rel="noopener noreferrer" role="menuitem">LinkedIn</a>
+          </div>
+        </li>
       </ul>
       <a href="https://calendly.com/alenashikova/30min" class="btn btn-gold nav-cta" data-variant="cta" target="_blank" rel="noopener noreferrer">Book a Call</a>
       <button class="nav-hamburger" id="menuToggle" aria-label="Open navigation menu" aria-expanded="false">
@@ -414,7 +367,9 @@
     <a href="#how-it-works">Process</a>
     <a href="#features">Services</a>
     <a href="#speaking">Speaking</a>
-    <a href="#faq">FAQ</a>
+    <a href="#connect">Connect</a>
+    <a href="https://x.com/AliceSh15" target="_blank" rel="noopener noreferrer">X</a>
+    <a href="https://www.linkedin.com/in/alice-shikova-36a708194/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
     <a href="https://calendly.com/alenashikova/30min" class="btn btn-gold" style="margin-top:8px;" data-variant="cta" target="_blank" rel="noopener noreferrer">Book a Call</a>
   </div>
 
@@ -561,78 +516,6 @@
       </div>
     </section>
 
-    <!-- ═══ FAQ ═══ -->
-    <section id="faq" aria-label="Frequently asked questions">
-      <div class="section-cap" aria-hidden="true"></div>
-      <div class="container">
-        <div class="faq-layout">
-          <aside class="faq-aside rv">
-            <p class="section-label">FAQ</p>
-            <h2>Questions worth asking.</h2>
-            <p>If something isn't covered here, a 20-minute call usually answers it. Book one — no pitch, no pressure.</p>
-            <a href="https://calendly.com/alenashikova/30min" class="btn btn-ghost" target="_blank" rel="noopener noreferrer">Book a Call</a>
-          </aside>
-          <div class="faq-list" role="list">
-            <div class="faq-item rv" role="listitem">
-              <button class="faq-q" aria-expanded="false">
-                What types of companies do you work with?
-                <span class="faq-icon" aria-hidden="true"><i data-lucide="plus" style="width:14px;height:14px;"></i></span>
-              </button>
-              <div class="faq-a" role="region">
-                <p class="faq-a-inner">AI, fintech, DeFi, Web3, and B2B technology companies that need clearer positioning, stronger market trust, founder-led growth, AI workflows, and measurable GTM execution.</p>
-              </div>
-            </div>
-            <div class="faq-item rv d1" role="listitem">
-              <button class="faq-q" aria-expanded="false">
-                How do you measure success?
-                <span class="faq-icon" aria-hidden="true"><i data-lucide="plus" style="width:14px;height:14px;"></i></span>
-              </button>
-              <div class="faq-a" role="region">
-                <p class="faq-a-inner">Every engagement starts with agreed business metrics: qualified leads, pipeline contribution, CAC, conversion rates, founder visibility, workflow hours saved, content velocity, transactions, or another target aligned with the company’s stage.</p>
-              </div>
-            </div>
-            <div class="faq-item rv d2" role="listitem">
-              <button class="faq-q" aria-expanded="false">
-                Do you only advise, or do you help implement?
-                <span class="faq-icon" aria-hidden="true"><i data-lucide="plus" style="width:14px;height:14px;"></i></span>
-              </button>
-              <div class="faq-a" role="region">
-                <p class="faq-a-inner">Both. The work can include strategy, positioning, AI workflow design, content systems, reporting, CRM support, founder-led growth, lead generation, and operating rhythm.</p>
-              </div>
-            </div>
-            <div class="faq-item rv d3" role="listitem">
-              <button class="faq-q" aria-expanded="false">
-                What does AI-native growth mean?
-                <span class="faq-icon" aria-hidden="true"><i data-lucide="plus" style="width:14px;height:14px;"></i></span>
-              </button>
-              <div class="faq-a" role="region">
-                <p class="faq-a-inner">It means using AI as part of the marketing operating system, not as a shortcut for generic content. The goal is faster research, sharper execution, better learning loops, and less manual work across the team.</p>
-              </div>
-            </div>
-            <div class="faq-item rv d4" role="listitem">
-              <button class="faq-q" aria-expanded="false">
-                Do you have experience with Web3 and fintech companies?
-                <span class="faq-icon" aria-hidden="true"><i data-lucide="plus" style="width:14px;height:14px;"></i></span>
-              </button>
-              <div class="faq-a" role="region">
-                <p class="faq-a-inner">Yes. Alice has worked with and advised teams across DeFi, blockchain infrastructure, fintech, trading, and AI products, including Folks Finance, SPACE ID, Rubic Exchange, Algebra Finance, Arrays.org, IQ Option, and more.</p>
-              </div>
-            </div>
-            <div class="faq-item rv" role="listitem">
-              <button class="faq-q" aria-expanded="false">
-                What makes this different from a typical agency?
-                <span class="faq-icon" aria-hidden="true"><i data-lucide="plus" style="width:14px;height:14px;"></i></span>
-              </button>
-              <div class="faq-a" role="region">
-                <p class="faq-a-inner">This is senior, operator-led advisory focused on strategy, systems, and measurable growth. No generic channel playbooks, no junior account layers, no activity for activity’s sake.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-
     <!-- ═══ SPEAKING ═══ -->
     <section id="speaking" aria-label="Speaking and public thinking">
       <div class="section-cap" aria-hidden="true"></div>
@@ -661,6 +544,29 @@
         </div>
       </div>
     </section>
+
+    <!-- ═══ CONNECT ═══ -->
+    <section id="connect" aria-label="Connect with Alice">
+      <div class="section-cap" aria-hidden="true"></div>
+      <div class="container connect-layout">
+        <div class="connect-copy rv">
+          <p class="section-label">Connect</p>
+          <h2>Follow the work<br><em>in public.</em></h2>
+          <p>For founder-led GTM notes, AI-native marketing systems, Web3 and fintech growth thinking, connect with Alice on X and LinkedIn.</p>
+        </div>
+        <div class="connect-list rv d2" role="list">
+          <a class="connect-link" href="https://x.com/AliceSh15" target="_blank" rel="noopener noreferrer" role="listitem">
+            <strong>X</strong>
+            <span>Open profile</span>
+          </a>
+          <a class="connect-link" href="https://www.linkedin.com/in/alice-shikova-36a708194/" target="_blank" rel="noopener noreferrer" role="listitem">
+            <strong>LinkedIn</strong>
+            <span>Open profile</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
 
     <!-- ═══ FINAL CTA ═══ -->
     <section id="cta-final" aria-label="Get started">
@@ -862,27 +768,6 @@
       if (e.key === 'ArrowRight') go(cur+1);
     });
   })();
-
-  /* ─── FAQ ACCORDION ─── */
-  document.querySelectorAll('.faq-q').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const item = btn.closest('.faq-item');
-      const ans  = item.querySelector('.faq-a');
-      const inner = item.querySelector('.faq-a-inner');
-      const isOpen = item.classList.contains('open');
-      // close all
-      document.querySelectorAll('.faq-item.open').forEach(el => {
-        el.classList.remove('open');
-        el.querySelector('.faq-a').style.maxHeight = '0';
-        el.querySelector('.faq-q').setAttribute('aria-expanded','false');
-      });
-      if (!isOpen) {
-        item.classList.add('open');
-        ans.style.maxHeight = inner.scrollHeight + 'px';
-        btn.setAttribute('aria-expanded','true');
-      }
-    });
-  });
 
   /* ─── ICONS INIT ─── */
   function initIcons() { if (typeof lucide !== 'undefined') lucide.createIcons(); }
